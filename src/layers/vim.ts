@@ -51,23 +51,22 @@ export const toDisableVim = [
 export const vimModes = rule('vim-modes', ifVar('vim')).manipulators([
   withCondition(ifVar('vim-mode', 'normal'))([
     map('⎋').to(toDisableVim),
-    map('⇪').to(toDisableVim),
-    map('i').to(toDisableVim),
+    map('l⇧').to(toDisableVim),
     map('v').to(toVimVisualMode),
   ]),
 
   withCondition(ifVar('vim-mode', 'visual'))([
     map('⎋').to(toVimNormalMode),
-    map('⇪').to(toDisableVim),
+    map('l⇧').to(toDisableVim),
 
     map('y').to('c', '⌘').to(toVimNormalMode),
     map('x').to('x', '⌘').to(toVimNormalMode),
     map('d').to('x', '⌘').to(toVimNormalMode),
 
     {
-      h: toKey('←', '⇧'),
-      j: toKey('↓', '⇧'),
-      k: toKey('↑', '⇧'),
+      j: toKey('←', '⇧'),
+      k: toKey('↓', '⇧'),
+      i: toKey('↑', '⇧'),
       l: toKey('→', '⇧'),
 
       0: toKey('←', '⌘⇧'),

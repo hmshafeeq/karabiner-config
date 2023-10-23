@@ -1,10 +1,10 @@
 import { ifDevice, map, rule } from 'karabiner.ts'
 
-const ifAppleKeyboard = ifDevice({ vendor_id: 1452, product_id: 835 })
+const ifAppleKeyboard = ifDevice({ vendor_id: 1452, product_id: 834 })
 
 export const appleKeyboard = rule('Apple', ifAppleKeyboard).manipulators([
-  map('⇪').to('⎋'),
-
-  map('›⌘', '⌥').toHyper(),
-  map('›⌥', '⇧').toMeh(),
+  map('fn').to('fn'),
+  // map('⇪').to('⎋'),
+  // map('›⌘', '⌥').toHyper(),
+  // map('›⌥', '⇧').toMeh(),
 ])

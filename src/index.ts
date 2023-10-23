@@ -2,11 +2,12 @@ import {
   duoLayer,
   ifVar,
   layer,
+  map,
   mapSimultaneous,
   rule,
   writeToProfile,
 } from 'karabiner.ts'
-import { appleKeyboard } from './devices/apple-keyboard'
+import { appleKeyboard } from './devices/apple-keyboard' 
 import { ifMoonlander, mouseCursor } from './devices/moonlander'
 import { digitsAndDelete } from './layers/digits-delete'
 import { emoji, emojiHint } from './layers/emoji'
@@ -24,39 +25,54 @@ import { appOverrides } from './rules/app-overrides'
 import { duoModifier } from './utils/duo-modifier'
 
 const rules = [
-  rule('duo-modifiers').manipulators([
-    duoModifier('fd', '⌘'),
-    duoModifier('fs', '⌃'),
-    duoModifier('fa', '⌥'),
-
-    duoModifier('ds', '⇧'),
-
-    duoModifier('gd', '⌘⇧'),
-    duoModifier('gs', '⌃⇧'),
-    duoModifier('ga', '⌥⇧'),
-
-    duoModifier('vc', '⌘⌥'),
-    duoModifier('vx', '⌘⌃'),
-    duoModifier('cx', '⌥⌃'),
-
-    duoModifier('vz', '⌘⌥⌃'),
-
-    duoModifier('jk', '⌘'),
-    duoModifier('jl', '⌃'),
-    duoModifier('j;', '⌥'),
-
-    duoModifier('kl', '⇧'),
-
-    duoModifier('hk', '⌘⇧'),
-    duoModifier('hl', '⌃⇧'),
-    duoModifier('h;', '⌘⇧'),
-
-    duoModifier('m,', '⌘⌥'),
-    duoModifier('m.', '⌘⌃'),
-    duoModifier(',.', '⌥⌃'),
-
-    duoModifier('m/', '⌘⌥⌃'),
+  
+  // rule(), layer(), simlayer(), hyperLayer(), duoLayer()
+   rule('Hyper Key (⌃⌥⇧⌘)').manipulators([
+    // Docs: https://evan-liu.github.io/karabiner.ts/ 
+    map('caps_lock').toHyper().toIfAlone('escape'),
   ]),
+
+  rule('Super Hyper Key (⌘⌥⌃⇧fn)').manipulators([ 
+    map('right_option').toSuperHyper().toIfAlone('right_option'),
+  ]),
+
+  rule('Meh Key (⌥⌃⇧)').manipulators([ 
+    map('tab').toMeh().toIfAlone('tab')                                         
+  ]),
+
+  // rule('duo-modifiers').manipulators([
+  //   duoModifier('fd', '⌘'),
+  //   duoModifier('fs', '⌃'),
+  //   duoModifier('fa', '⌥'),
+
+  //   duoModifier('ds', '⇧'),
+
+  //   duoModifier('gd', '⌘⇧'),
+  //   duoModifier('gs', '⌃⇧'),
+  //   duoModifier('ga', '⌥⇧'),
+
+  //   duoModifier('vc', '⌘⌥'),
+  //   duoModifier('vx', '⌘⌃'),
+  //   duoModifier('cx', '⌥⌃'),
+
+  //   duoModifier('vz', '⌘⌥⌃'),
+
+  //   duoModifier('jk', '⌘'),
+  //   duoModifier('jl', '⌃'),
+  //   duoModifier('j;', '⌥'),
+
+  //   duoModifier('kl', '⇧'),
+
+  //   duoModifier('hk', '⌘⇧'),
+  //   duoModifier('hl', '⌃⇧'),
+  //   duoModifier('h;', '⌘⇧'),
+
+  //   duoModifier('m,', '⌘⌥'),
+  //   duoModifier('m.', '⌘⌃'),
+  //   duoModifier(',.', '⌥⌃'),
+
+  //   duoModifier('m/', '⌘⌥⌃'),
+  // ]),
 
   rule('to vim modes', ifVar('vim').unless()).manipulators([
     mapSimultaneous(['a', ';']).to(toVimNormalMode),
@@ -68,16 +84,21 @@ const rules = [
     .condition(ifVar('vim-mode', 'visual').unless())
     .manipulators(vimNormalMode)
     .notification('vim - h ← j ↓ k ↑ l →'),
-  duoLayer('s', ';')
+ 
+    duoLayer('s', ';')
     .manipulators(symbols)
     .notification('^ { [ ( $,    _ } ] ),\n% _ = - +'),
+
   duoLayer('d', ';')
     .manipulators(digitsAndDelete)
     .notification('_ 4 5 6 ⌫,   _ 7 8 9,\n0 1 2 3'),
 
   duoLayer('z', 'x').manipulators(emoji).notification(emojiHint),
+  
   duoLayer('l', ';').manipulators(launchApp).notification('Launch App 🚀 📱'),
+  
   duoLayer('.', '/').manipulators(openLinks).notification('Open Link 🔗'),
+
   layer('`', 'mouse').condition(ifMoonlander).manipulators(mouseCursor),
 
   vimModes,
@@ -86,8 +107,11 @@ const rules = [
   appOverrides,
 ]
 
-writeToProfile('Default', rules, {
-  'basic.simultaneous_threshold_milliseconds': 100,
+writeToProfile('Other', rules, {
+  "basic.simultaneous_threshold_milliseconds": 100,
+  "basic.to_delayed_action_delay_milliseconds": 150,
+  "basic.to_if_alone_timeout_milliseconds": 300,
+  "basic.to_if_held_down_threshold_milliseconds": 200,                               
   'duo_layer.threshold_milliseconds': 200,
   'duo_layer.notification': true,
 })

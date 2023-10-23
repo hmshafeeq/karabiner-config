@@ -1,7 +1,7 @@
 {
   "name": "karabiner-config",
   "scripts": {
-    "build": "ts-node src/index.ts",
+    "build": "ts-node src/index.ts && launchctl kickstart -k gui/`id -u`/org.pqrs.karabiner.karabiner_console_user_server",
     "update": "npm update karabiner.ts", 
     "watch": "nodemon --exec npm run build -e ts"
   },
