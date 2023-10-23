@@ -75,10 +75,10 @@ const rules = [
 ]
 
 writeToProfile('Default', rules, {
-  "basic.simultaneous_threshold_milliseconds": 100,
+  "basic.simultaneous_threshold_milliseconds": 50,
   "basic.to_delayed_action_delay_milliseconds": 150,
   "basic.to_if_alone_timeout_milliseconds": 300,
-  "basic.to_if_held_down_threshold_milliseconds": 200,                               
+  "basic.to_if_held_down_threshold_milliseconds": 150,                               
   'duo_layer.threshold_milliseconds': 200,
   'duo_layer.notification': true,
 })
