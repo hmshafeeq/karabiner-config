@@ -1,5 +1,6 @@
 import {
   duoLayer,
+  hyperLayer,
   ifVar,
   layer,
   map,
@@ -39,41 +40,7 @@ const rules = [
   rule('Meh Key (⌥⌃⇧)').manipulators([ 
     map('tab').toMeh().toIfAlone('tab')                                         
   ]),
-
-  // rule('duo-modifiers').manipulators([
-  //   duoModifier('fd', '⌘'),
-  //   duoModifier('fs', '⌃'),
-  //   duoModifier('fa', '⌥'),
-
-  //   duoModifier('ds', '⇧'),
-
-  //   duoModifier('gd', '⌘⇧'),
-  //   duoModifier('gs', '⌃⇧'),
-  //   duoModifier('ga', '⌥⇧'),
-
-  //   duoModifier('vc', '⌘⌥'),
-  //   duoModifier('vx', '⌘⌃'),
-  //   duoModifier('cx', '⌥⌃'),
-
-  //   duoModifier('vz', '⌘⌥⌃'),
-
-  //   duoModifier('jk', '⌘'),
-  //   duoModifier('jl', '⌃'),
-  //   duoModifier('j;', '⌥'),
-
-  //   duoModifier('kl', '⇧'),
-
-  //   duoModifier('hk', '⌘⇧'),
-  //   duoModifier('hl', '⌃⇧'),
-  //   duoModifier('h;', '⌘⇧'),
-
-  //   duoModifier('m,', '⌘⌥'),
-  //   duoModifier('m.', '⌘⌃'),
-  //   duoModifier(',.', '⌥⌃'),
-
-  //   duoModifier('m/', '⌘⌥⌃'),
-  // ]),
-
+ 
   rule('to vim modes', ifVar('vim').unless()).manipulators([
     mapSimultaneous(['a', ';']).to(toVimNormalMode),
     mapSimultaneous(['v', ';']).to(toVimVisualMode),
@@ -83,7 +50,7 @@ const rules = [
   duoLayer('f', ';', 'vim')
     .condition(ifVar('vim-mode', 'visual').unless())
     .manipulators(vimNormalMode)
-    .notification('vim - h ← j ↓ k ↑ l →'),
+    .notification('vim - j ← k ↓ i ↑ l →'),
  
     duoLayer('s', ';')
     .manipulators(symbols)
@@ -94,7 +61,7 @@ const rules = [
     .notification('_ 4 5 6 ⌫,   _ 7 8 9,\n0 1 2 3'),
 
   duoLayer('z', 'x').manipulators(emoji).notification(emojiHint),
-  
+   
   duoLayer('l', ';').manipulators(launchApp).notification('Launch App 🚀 📱'),
   
   duoLayer('.', '/').manipulators(openLinks).notification('Open Link 🔗'),
@@ -107,7 +74,7 @@ const rules = [
   appOverrides,
 ]
 
-writeToProfile('Other', rules, {
+writeToProfile('Default', rules, {
   "basic.simultaneous_threshold_milliseconds": 100,
   "basic.to_delayed_action_delay_milliseconds": 150,
   "basic.to_if_alone_timeout_milliseconds": 300,

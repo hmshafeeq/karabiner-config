@@ -11,9 +11,9 @@ import {
 import { toLocalSound } from '../utils/sounds'
 
 export const vimNormalMode = {
-  h: toKey('←'),
-  j: toKey('↓'),
-  k: toKey('↑'),
+  j: toKey('←'),
+  k: toKey('↓'),
+  i: toKey('↑'),
   l: toKey('→'),
 
   0: toKey('←', '⌘'),

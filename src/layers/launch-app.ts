@@ -8,12 +8,16 @@ export const launchApp = {
   f: toApp('Finder'),
   i: toApp('WeChat'), // IM
   k: toApp('Lens'), // K8s
-  m: toApp('Airmail'), // Mail
+
+  j: toApp('Sequel Ace'), // SequelAce
+  h: toApp('Herd'), // Herd
+  g: toApp('DBngin'), // DBngin
+
   n: toApp('Obsidian'), // Notes
   r: toIDE('Rider'),
-  s: toApp('Slack'),
+  s: toApp('Slack'),                     
   t: toApp('Warp'), // Terminal
-  w: toIDE('WebStorm'),
+  p: toIDE('PhpStorm'),
   x: toApp('Xcode'),
   z: toApp('zoom.us'),
   ',': toApp('System Settings'),
