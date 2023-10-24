@@ -41,32 +41,37 @@ const rules = [
     map('tab').toMeh().toIfAlone('tab')                                         
   ]),
  
+  // ']' + '\' and '[' + ']'
   rule('to vim modes', ifVar('vim').unless()).manipulators([
-    mapSimultaneous(['a', ';']).to(toVimNormalMode),
-    mapSimultaneous(['v', ';']).to(toVimVisualMode),
+    mapSimultaneous(['close_bracket', 'backslash']).to(toVimNormalMode),
+    mapSimultaneous(['open_bracket', 'close_bracket']).to(toVimVisualMode),
   ]),
 
   // ; can be released once layer is activated
-  duoLayer('f', ';', 'vim')
+  // ; + '
+  duoLayer('semicolon', 'quote', 'vim')
     .condition(ifVar('vim-mode', 'visual').unless())
     .manipulators(vimNormalMode)
     .notification('vim - j ← k ↓ i ↑ l →'),
  
-    duoLayer('s', ';')
-    .manipulators(symbols)
-    .notification('^ { [ ( $,    _ } ] ),\n% _ = - +'),
+  //   duoLayer('s', ';')
+  //   .manipulators(symbols)
+  //   .notification('^ { [ ( $,    _ } ] ),\n% _ = - +'),
 
-  duoLayer('d', ';')
-    .manipulators(digitsAndDelete)
-    .notification('_ 4 5 6 ⌫,   _ 7 8 9,\n0 1 2 3'),
+  // duoLayer('d', ';')
+  //   .manipulators(digitsAndDelete)
+  //   .notification('_ 4 5 6 ⌫,   _ 7 8 9,\n0 1 2 3'),
 
-  duoLayer('z', 'x').manipulators(emoji).notification(emojiHint),
-   
-  duoLayer('l', ';').manipulators(launchApp).notification('Launch App 🚀 📱'),
+  // '=' + delete_or_backspace
+  duoLayer('equal_sign', 'delete_or_backspace').manipulators(emoji).notification(emojiHint),
   
-  duoLayer('.', '/').manipulators(openLinks).notification('Open Link 🔗'),
+  // ./ 
+  duoLayer('period', 'slash').manipulators(launchApp).notification('Launch App 🚀 📱'),
+  
+  //,.
+  duoLayer('comma', 'period').manipulators(openLinks).notification('Open Link 🔗'),
 
-  layer('`', 'mouse').condition(ifMoonlander).manipulators(mouseCursor),
+  // layer('`', 'mouse').condition(ifMoonlander).manipulators(mouseCursor),
 
   vimModes,
   appleKeyboard,
@@ -79,6 +84,6 @@ writeToProfile('Default', rules, {
   "basic.to_delayed_action_delay_milliseconds": 150,
   "basic.to_if_alone_timeout_milliseconds": 300,
   "basic.to_if_held_down_threshold_milliseconds": 150,                               
-  'duo_layer.threshold_milliseconds': 200,
+  'duo_layer.threshold_milliseconds': 100,
   'duo_layer.notification': true,
 })
