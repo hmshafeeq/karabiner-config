@@ -1,19 +1,15 @@
 import { env } from 'node:process'
 import { ToEvent } from 'karabiner.ts'
 import { toSafari } from '../utils/to-safari'
+import { toArc } from '../utils/to-arc'
 
-const workGitHubOrg = env.WORK_GH_ORG!
-const workJiraOrg = env.WORK_JIRA_ORG!
-const workJiraProj = env.WORK_JIRA_PROJ!
-
-const workJira = `https://${workJiraOrg}.atlassian.net/`
+const workGitHubOrg = env.WORK_GH_ORG! 
+ 
 export const openLinks = {
-  c: toLink('https://chat.openai.com/'),
-  g: toLink('https://github.com'),
-  j: toWorkLink(`${workJira}/browse/${workJiraProj}`, workJira),
+  c: toArc('https://chat.openai.com/'),
+  g: toLink('https://github.com'), 
   m: toLink('https://mail.google.com'),
-  w: toLink('https://www.metservice.com/towns-cities/locations/auckland'), // Weather
-  y: toLink('https://music.youtube.com'),
+  y: toArc('https://youtube.com'),
   ...workRepos(),
 }
 
