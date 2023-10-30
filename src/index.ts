@@ -22,7 +22,6 @@ import {
   vimNormalMode,
 } from './layers/vim'
 import { appModifiers } from './rules/app-modifiers'
-import { appOverrides } from './rules/app-overrides'
 import { duoModifier } from './utils/duo-modifier'
 
 const rules = [
@@ -73,10 +72,11 @@ const rules = [
 
   // layer('`', 'mouse').condition(ifMoonlander).manipulators(mouseCursor),
 
+  rule('Homerow').manipulators([mapSimultaneous(['f', 'j']).to('␣', 'Hyper')]),
+
   vimModes,
   appleKeyboard,
   appModifiers,
-  appOverrides,
 ]
 
 writeToProfile('Default', rules, {
